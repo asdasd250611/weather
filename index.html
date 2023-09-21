@@ -90,16 +90,11 @@
 			<input type="submit" value="Get Weather" id="submit">
 		</form>
 		<table>
-			<thead>
-				<th>City Name</th>
-				<th>Temperature </th>
-				<th>Humidity </th>
-				<th>Wind</th>
-			</thead>
 			<tbody>
 
 			</tbody>
 		</table>
+		
 
 	</div>
 </body>
@@ -119,8 +114,9 @@
 			console.log(i);
 			var tem = i.main.temp - 273.15;
 			temp = tem.toPrecision(3)
-			document.querySelector('table tbody').innerHTML += `<tr><td>${i.name}</td> <td>${temp} <sup>o</sup>C</td> <td>${i.main.humidity}%</td> <td>${i.wind.speed
-				} km/h</td></tr>`;
+			// document.querySelector('table tbody').innerHTML += `<tr><td>${i.name}</td> <td>${temp} <sup>o</sup>C</td> <td>${i.main.humidity}%</td> <td>${i.wind.speed
+			// 	} km/h</td></tr>`;
+			document.querySelector('table tbody').innerHTML +=`<tr><td>City Name</td><td>${i.name}</td></tr><tr><td>Temperature</td><td>${temp} <sup>o</sup>C</td></tr><tr><td>Humidity</td><td>${i.main.humidity}%</td></tr><tr><td>Wind</td><td>${i.wind.speed} km/h</td></tr>`;
 
 		})
 
