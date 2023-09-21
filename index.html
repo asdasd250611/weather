@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			height: 100vh;
+			background: url(bodybg.webp);
+			/* display: flex; */
+			background-position: center center;
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
+
+		.con {
+			margin: auto;
+			
+			padding: 10px;
+			max-width: 400px;
+			background-color: #fdfdfd3a;
+			border: 1px solid #fff;
+			border-radius: 15px;
+
+		}
+
+		h1 {
+			text-align: center;
+			margin: 20px;
+		}
+
+		table,
+		td,
+		th {
+			border-collapse: collapse;
+			border: 1px solid #000;
+			text-align: center;
+		}
+
+		table {
+			margin: 20px auto;
+		}
+
+		th,
+		td {
+			margin: 10px;
+			padding: 10px;
+			font-size: 1rem;
+			font-weight: 800;
+			background-color: #F2E8C6;
+		}
+
+		td {
+			background-color: #f0ecde;
+		}
+
+		input {
+			margin: 10px 20px;
+			padding: 15px;
+			outline: none;
+			font-size: 20px;
+			font-weight: 800;
+			border-radius: 5px;
+			width: 90%;
+		}
+
+		input[type=submit] {
+			background-color: #e3bd42;
+		}
+
+		input[type=submit]:hover {
+			background-color: #f5da81;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="con">
+		<h1>Get Weather</h1>
+		<form action="#" id="citydatasubmit">
+			<input type="text" name="city" id="cityname" placeholder="Enter City name">
+			<input type="submit" value="Get Weather" id="submit">
+		</form>
+		<table>
+			<thead>
+				<th>City Name</th>
+				<th>Temperature </th>
+				<th>Humidity </th>
+				<th>Wind</th>
+			</thead>
+			<tbody>
+
+			</tbody>
+		</table>
+
+	</div>
+</body>
+
+</html>
+<script>
+	document.querySelector("#citydatasubmit").addEventListener("submit", function (e) {
+		e.preventDefault();
+		document.querySelector('table tbody').innerHTML = "";
+		var cityname = document.querySelector('#cityname').value
+		// console.log(cityname);
+		// document.querySelector('.da').textContent+=`${cityname}`;
+		var apikey = "f64e10ba6384c7e02683cbacd40ddf16";
+
+		var url = `https://api.openweathermap.org/data/2.5/weather?q=${cityname}&appid=${apikey}`;
+		fetch(url).then(i => i.json()).then(i => {
+			console.log(i);
+			var tem = i.main.temp - 273.15;
+			temp = tem.toPrecision(3)
+			document.querySelector('table tbody').innerHTML += `<tr><td>${i.name}</td> <td>${temp} <sup>o</sup>C</td> <td>${i.main.humidity}%</td> <td>${i.wind.speed
+				} km/h</td></tr>`;
+
+		})
+
+	})
+
+
+
+
+
+
+
+</script>
