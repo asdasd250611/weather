@@ -4,7 +4,8 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+	<title>Weather</title>
+	<meta name="description" content="made by saurav">
 	<style>
 		* {
 			margin: 0;
@@ -15,7 +16,7 @@
 		body {
 			height: 100vh;
 			background: url(bodybg.webp);
-			/* display: flex; */
+			display: flex;
 			background-position: center center;
 			background-repeat: no-repeat;
 			background-size: cover;
@@ -97,35 +98,36 @@
 		
 
 	</div>
+	<script>
+	
+		document.querySelector("#citydatasubmit").addEventListener("submit", function (e) {
+			e.preventDefault();
+			document.querySelector('table tbody').innerHTML = "";
+			var cityname = document.querySelector('#cityname').value
+			// console.log(cityname);
+			// document.querySelector('.da').textContent+=`${cityname}`;
+			var apikey = "f64e10ba6384c7e02683cbacd40ddf16";
+	
+			var url = `https://api.openweathermap.org/data/2.5/weather?q=${cityname}&appid=${apikey}`;
+			fetch(url).then(i => i.json()).then(i => {
+				console.log(i);
+				var tem = i.main.temp - 273.15;
+				temp = tem.toPrecision(3)
+				// document.querySelector('table tbody').innerHTML += `<tr><td>${i.name}</td> <td>${temp} <sup>o</sup>C</td> <td>${i.main.humidity}%</td> <td>${i.wind.speed
+				// 	} km/h</td></tr>`;
+				document.querySelector('table tbody').innerHTML +=`<tr><td>City Name</td><td>${i.name}</td></tr><tr><td>Temperature</td><td>${temp} <sup>o</sup>C</td></tr><tr><td>Humidity</td><td>${i.main.humidity}%</td></tr><tr><td>Wind</td><td>${i.wind.speed} km/h</td></tr>`;
+	
+			})
+	
+		})
+	
+	
+	
+	
+	
+	
+	
+	</script>
 </body>
 
 </html>
-<script>
-	document.querySelector("#citydatasubmit").addEventListener("submit", function (e) {
-		e.preventDefault();
-		document.querySelector('table tbody').innerHTML = "";
-		var cityname = document.querySelector('#cityname').value
-		// console.log(cityname);
-		// document.querySelector('.da').textContent+=`${cityname}`;
-		var apikey = "f64e10ba6384c7e02683cbacd40ddf16";
-
-		var url = `https://api.openweathermap.org/data/2.5/weather?q=${cityname}&appid=${apikey}`;
-		fetch(url).then(i => i.json()).then(i => {
-			console.log(i);
-			var tem = i.main.temp - 273.15;
-			temp = tem.toPrecision(3)
-			// document.querySelector('table tbody').innerHTML += `<tr><td>${i.name}</td> <td>${temp} <sup>o</sup>C</td> <td>${i.main.humidity}%</td> <td>${i.wind.speed
-			// 	} km/h</td></tr>`;
-			document.querySelector('table tbody').innerHTML +=`<tr><td>City Name</td><td>${i.name}</td></tr><tr><td>Temperature</td><td>${temp} <sup>o</sup>C</td></tr><tr><td>Humidity</td><td>${i.main.humidity}%</td></tr><tr><td>Wind</td><td>${i.wind.speed} km/h</td></tr>`;
-
-		})
-
-	})
-
-
-
-
-
-
-
-</script>
